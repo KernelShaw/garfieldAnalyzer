@@ -1,13 +1,13 @@
 def decoy_method(what):
     return
 
-class GarfieldBase:
 
-    def __int__(self):
+class GarfieldBase:
+    def __init__(self):
         self.strip_info = dict()
         self.strip_list = list()
 
-        n = open("counts.txt", 'r')
+        n = open("data/counts.txt", 'r')
         with open("data/strip_list.txt", 'r') as t:
             lines = t.readlines()
             count_list = n.readlines()
@@ -27,33 +27,36 @@ class GarfieldBase:
         import random
         return random.choice(self.strip_list)
 
-    # def data_entry(self, strip, joke_id):
-        # Submit it to google drive.
-        # Edit the entry count dictionary using the index
-        # Edit and save entry count file using index
-        # If count == 10, then delete strip entry
-
     def update_entry_details(self, strip):
         total_number_of_responses = self.strip_info[strip][0]
         index = self.strip_info[strip][1]
 
         # Google Drive Here
 
-        n = open("counts.txt", 'r')
+        n = open("data/counts.txt", 'r')
         count_list = n.readlines()
-        count_list[index] = str(total_number_of_responses + 1)
+        if len(count_list[index]) == 2:
+            count_list[index] = str(total_number_of_responses + 1) + "\n"
+        else:
+            count_list[index] = str(total_number_of_responses + 1)  # The ONE edge case
 
-        n = open("counts.txt", 'w')
+        n = open("data/counts.txt", 'w')
         n.writelines(count_list)
         n.close()
 
         if total_number_of_responses + 1 == 10:  # Once a strip reaches 10 responses, it's retired.
-            n = open("strip_list.txt", 'r')
+            n = open("data/strip_list.txt", 'r')
             strips = n.readlines()
-            strips[index] = "COMPLETED " + strips[index]
+            if len(strips[index]) == 15:
+                strips[index] = "COMPLETED " + strips[index] + "\n"
+            else:
+                strips[index] = "COMPLETED " + strips[index]  # The ONE edge case
 
-            n = open("strip_list.txt", 'w')
+            n = open("data/strip_list.txt", 'w')
             n.writelines(strips)
             n.close()
 
             del self.strip_list[index]
+
+    def drive_update(self, index, joke, laugh=False):
+        return

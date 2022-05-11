@@ -5,35 +5,47 @@
     <title>Purefield</title>
 </head>
 <body>
-    <h1>Dumb Garfield Joke Analysis Project</h1>
-    <h4>Hiya! Welcome to the Garfield Data Collection website!</h4>
+    <h1>The Garfield Analysis Project</h1>
+    <h2>Confused? Visit the <a href="{{ url_for('about') }}">about page!</a></h2>
     <img src="{{comic}}" ><br>
-    <h5>What's the joke?</h5>
+    <h3>So, what's the joke?</h3>
     <form action="{{ url_for('garfield_analyzer') }}" method="post">
 	    <input type="radio" id="option1" name="selection" value="OPTION1">
-        <label for="option1">Option 1</label><br>
+        <label for="option1">Option 1</label>
         <input type="radio" id="option2" name="selection" value="OPTION2">
-        <label for="option2">Option 2</label><br>
+        <label for="option2">Option 2</label>
         <input type="radio" id="option3" name="selection" value="OPTION3">
         <label for="option3">Option 3</label><br>
         <input type="radio" id="option4" name="selection" value="OPTION4">
-        <label for="option4">Option 4</label><br>
+        <label for="option4">Option 4</label>
         <input type="radio" id="option5" name="selection" value="OPTION5">
-        <label for="option5">Option 5</label><br>
+        <label for="option5">Option 5</label>
         <input type="radio" id="option6" name="selection" value="OPTION6">
         <label for="option6">Option 6</label><br>
         <input type="radio" id="option7" name="selection" value="OPTION7">
-        <label for="option7">Option 7</label><br>
+        <label for="option7">Option 7</label>
         <input type="radio" id="option8" name="selection" value="OPTION8">
-        <label for="option8">Option 8</label><br><br>
+        <label for="option8">Option 8</label>
+        <input type="radio" id="option9" name="selection" value="OPTION9">
+        <label for="option9">Option 9</label><br>
+        <input type="radio" id="option10" name="selection" value="OPTION10">
+        <label for="option10">Option 10</label>
+        <input type="radio" id="option11" name="selection" value="OPTION11">
+        <label for="option11">Option 11</label>
+        <br><br>
         <button type="submit">Submit Response</button>
-    </form><br>
+    </form>
+
+    {% if status_message %}
+    <h4>{{ status_message }}</h4>
+    {% endif %}
+
     <p>Inspired by <a href="https://youtu.be/O2C5R3FOWdE">Super Eyepatch Wolf's fantastic Garfield fever dream</a>,
         this website aims to complete his woefully unpure spreadsheet on the nature of "jokes" in Garfield.</p>
     <p>Garfield has, at the time of this writing, over 14,000 comic strips in existence.
         That is a lot of fuckin' Garfield.</p>
     <p>I created this website partly out of necessity, and partly out of boredom.
-        I "purposely" designed this website to be relatively lightweight,
+        I "purposefully" designed this website to be relatively lightweight,
         so you can help contribute whilst on your commute, during your lunch break, driving...
         maybe not that last one. Please don't check this website while driving.</p>
 </body>
