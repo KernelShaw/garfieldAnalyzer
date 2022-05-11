@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-from strip_methods import GarfieldBase, decoy_method
+from strip_methods import GarfieldBase
 
 # GLOBALS
 RANDOM_STRIP = ""
@@ -22,9 +22,10 @@ def garfield_analyzer():
             return render_template('main.html', comic=strip_location, status_message="No selection. Please select one "
                                                                                      "of the joke options.")
         else:
-            GARFIELD_ANALYZER.update_entry_details(RANDOM_STRIP)
+            GARFIELD_ANALYZER.update_entry_details(RANDOM_STRIP, selection)
             RANDOM_STRIP = GARFIELD_ANALYZER.random_strip()
             strip_location = "/static/garfield/" + RANDOM_STRIP + ".gif"
+            print("entry added")
             return render_template('main.html', comic=strip_location, status_message="Thanks for your response!"
                                                                                      " Keep going.")
     else:
@@ -40,4 +41,4 @@ def about():
 
 
 if __name__ == "__app__":
-    app.run(host="127.0.0.1", port=8080, debug=True)
+    app.run(host='192.168.1.185', debug=True)

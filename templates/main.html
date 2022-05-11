@@ -1,5 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .imgbox {
+            display: grid;
+            height: 100%;
+        }
+        .center-fit {
+            max-width: 100%;
+            max-height: 100vh;
+            margin: auto;
+        }
+    </style>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/main.css') }}" />
 <head>
     <meta charset="UTF-8">
@@ -8,34 +23,39 @@
 <body>
     <h1>The Garfield Analysis Project</h1>
     <h2>Confused? Visit the <a href="{{ url_for('about') }}">about page!</a></h2>
-    <img src="{{comic}}" ><br>
+    <br>
+    <div class="imgbox">
+        <img class="center-fit" src="{{comic}}" ><br>
+    </div>
     <h3>So, what's the joke?</h3>
+    <br>
     <form action="{{ url_for('garfield_analyzer') }}" method="post">
-	    <input type="radio" id="option1" name="selection" value="OPTION1">
-        <label for="option1">Option 1</label>
-        <input type="radio" id="option2" name="selection" value="OPTION2">
-        <label for="option2">Option 2</label>
-        <input type="radio" id="option3" name="selection" value="OPTION3">
-        <label for="option3">Option 3</label><br>
-        <input type="radio" id="option4" name="selection" value="OPTION4">
-        <label for="option4">Option 4</label>
-        <input type="radio" id="option5" name="selection" value="OPTION5">
-        <label for="option5">Option 5</label>
-        <input type="radio" id="option6" name="selection" value="OPTION6">
-        <label for="option6">Option 6</label><br>
-        <input type="radio" id="option7" name="selection" value="OPTION7">
-        <label for="option7">Option 7</label>
-        <input type="radio" id="option8" name="selection" value="OPTION8">
-        <label for="option8">Option 8</label>
-        <input type="radio" id="option9" name="selection" value="OPTION9">
-        <label for="option9">Option 9</label><br>
-        <input type="radio" id="option10" name="selection" value="OPTION10">
-        <label for="option10">Option 10</label>
-        <input type="radio" id="option11" name="selection" value="OPTION11">
-        <label for="option11">Option 11</label>
+	    <input type="radio" id="option1" name="selection" value="K">
+        <label for="option1">Garfield hates Odie</label>
+        <input type="radio" id="option2" name="selection" value="J">
+        <label for="option2">Garfield abusing Jon</label>
+        <input type="radio" id="option3" name="selection" value="H">
+        <label for="option3">Garfield is lazy/gluttonous</label><br>
+        <input type="radio" id="option4" name="selection" value="E">
+        <label for="option4">Garfield hates Spiders</label>
+        <input type="radio" id="option5" name="selection" value="C">
+        <label for="option5">Garfield hates Nermal</label>
+        <input type="radio" id="option6" name="selection" value="D">
+        <label for="option6">Garfield and Liz</label><br>
+        <input type="radio" id="option7" name="selection" value="F">
+        <label for="option7">Relatable humor</label>
+        <input type="radio" id="option8" name="selection" value="G">
+        <label for="option8">Surreal/Absurdist</label>
+        <input type="radio" id="option9" name="selection" value="I">
+        <label for="option9">Jon is pathetic</label><br>
+        <input type="radio" id="option10" name="selection" value="B">
+        <label for="option10">Irma joke</label>
+        <input type="radio" id="option11" name="selection" value="L">
+        <label for="option11">Other</label>
         <br><br>
         <button type="submit">Submit Response</button>
     </form>
+    <br>
 
     {% if status_message %}
     <h4>{{ status_message }}</h4>
@@ -43,7 +63,7 @@
 
     <p>Inspired by <a href="https://youtu.be/O2C5R3FOWdE">Super Eyepatch Wolf's fantastic Garfield fever dream</a>,
         this website aims to complete his woefully unpure spreadsheet on the nature of "jokes" in Garfield.</p>
-    <p>Garfield has, at the time of this writing, over 14,000 comic strips in existence.
+    <p>Garfield has, at the time of this writing, over 16,000 comic strips in existence.
         That is a lot of fuckin' Garfield.</p>
     <p>I created this website partly out of necessity, and partly out of boredom.
         I "purposefully" designed this website to be relatively lightweight,

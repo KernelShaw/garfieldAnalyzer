@@ -1,5 +1,4 @@
-def decoy_method(what):
-    return
+from drive_methods import drive_update
 
 
 class GarfieldBase:
@@ -27,11 +26,11 @@ class GarfieldBase:
         import random
         return random.choice(self.strip_list)
 
-    def update_entry_details(self, strip):
+    def update_entry_details(self, strip, joke):
         total_number_of_responses = self.strip_info[strip][0]
         index = self.strip_info[strip][1]
 
-        # Google Drive Here
+        drive_update(index, joke)
 
         n = open("data/counts.txt", 'r')
         count_list = n.readlines()
@@ -57,6 +56,3 @@ class GarfieldBase:
             n.close()
 
             del self.strip_list[index]
-
-    def drive_update(self, index, joke, laugh=False):
-        return

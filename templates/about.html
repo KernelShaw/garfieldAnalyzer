@@ -1,14 +1,20 @@
 <!DOCTYPE html>
-<title>About</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/main.css') }}" />
+<head>
+    <meta charset="UTF-8">
+    <title>About Purefield</title>
+</head>
 <body>
-<h2>Spare me the details. How does this work?</h2>
-<h3>Read the strip. Select the joke the strip tells. Submit. Rinse. Repeat.</h3>
+<h1>Spare me the details. How does this work?</h1>
+<h2>Read the strip. Select the joke the strip tells. Submit. Rinse. Repeat.</h2>
+<h3>Optional: If the joke made you laugh, check off the "I Laughed" box.</h3>
+<h3>Category explanations can be found here.</h3>
 <h3>Understood? <a href="{{ url_for('garfield_analyzer') }}">Head back.</a></h3>
-<h2>About The Project</h2>
+<h1>About The Project</h1>
 <h3>What the hell is going on here?</h3>
 <p>I'm glad you asked! So, there's this dope lil' video made by a fella named Super Eyepatch Wolf. It's a look into
 the history of Garfield as a cultural icon, with an emphasis on his online presence. In the video, SEW decides to read
-like a thousand strips to determine what the most common Garfield joke is. Problem being, well, there's like 14,000+
+like a thousand strips to determine what the most common Garfield joke is. Problem being, well, there's 16,000+
 strips. This site aims to complete that data. Through the power of the internet, we can TRULY determine the most
 common Garfield joke!</p>
 <h3>Okay, but why?</h3>
