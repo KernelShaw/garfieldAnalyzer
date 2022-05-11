@@ -1,14 +1,31 @@
-from flask import Flask, render_template
+from flask import Flask, request, render_template
 import random
+from strip_methods import GarfieldBase
 
+# GLOBALS
+RANDOM_STRIP = ""
+GARFIELD_ANALYZER = GarfieldBase
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def garfield_analyzer():
-    random_strip = "/static/strips/" + str(random.randint(1, 3)) + ".gif"
-    return render_template('main.html', comic=random_strip)
-    #return "<p>Hello, World!</p>"
+    global RANDOM_STRIP
+
+    if RANDOM_STRIP == "":
+        RANDOM_STRIP = "/static/strips/" + str(random.randint(1, 3)) + ".gif"
+
+    if request.method == "POST":
+        selection = request.form.get("selection")
+        if selection is None:
+             # Return new HTML page, DO NOT UPDATE COMIC VAR
+        else:
+            decoy_method(selection)  # Database edits
+            RANDOM_STRIP = "/static/strips/" + str(random.randint(1, 3)) + ".gif"
+    else:
+        RANDOM_STRIP = "/static/strips/" + str(random.randint(1, 3)) + ".gif"
+
+    return render_template('main.html', comic=RANDOM_STRIP)
 
 
 @app.route("/about")
