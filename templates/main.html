@@ -15,13 +15,21 @@
             margin: auto;
         }
     </style>
-<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/main.css') }}" />
+    <script>
+    function submit() {
+        var elem=document.getElementById("submit_button");
+        elem.innerHTML="Submitting...";
+        elem.disabled=true;
+    }
+    </script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/main.css') }}" />
 <head>
     <meta charset="UTF-8">
     <title>Purefield</title>
 </head>
 <body>
-    <h1>The Garfield Analysis Project</h1>
+    <br>
+    <h1>The Garfield Analysis Project</h1><br>
     <h2>Confused? Visit the <a href="{{ url_for('about') }}">about page!</a></h2>
     <br>
     <div class="imgbox">
@@ -29,7 +37,7 @@
     </div>
     <h3>So, what's the joke?</h3>
     <br>
-    <form action="{{ url_for('garfield_analyzer') }}" method="post">
+    <form action="{{ url_for('garfield_analyzer') }}" method="post" id="main_form">
 	    <input type="radio" id="option1" name="selection" value="K">
         <label for="option1">Garfield hates Odie</label>
         <input type="radio" id="option2" name="selection" value="J">
@@ -37,11 +45,11 @@
         <input type="radio" id="option3" name="selection" value="H">
         <label for="option3">Garfield is lazy/gluttonous</label><br>
         <input type="radio" id="option4" name="selection" value="E">
-        <label for="option4">Garfield hates Spiders</label>
+        <label for="option4">Garfield hates spiders</label>
         <input type="radio" id="option5" name="selection" value="C">
         <label for="option5">Garfield hates Nermal</label>
         <input type="radio" id="option6" name="selection" value="D">
-        <label for="option6">Garfield and Liz</label><br>
+        <label for="option6">Garfield and Arlene</label><br>
         <input type="radio" id="option7" name="selection" value="F">
         <label for="option7">Relatable humor</label>
         <input type="radio" id="option8" name="selection" value="G">
@@ -53,13 +61,18 @@
         <input type="radio" id="option11" name="selection" value="L">
         <label for="option11">Other</label>
         <br><br>
-        <button type="submit">Submit Response</button>
+        <input type="checkbox" id="laugh" name="laugh" value ="laugh_check">
+        <label for="laugh">I Laughed!</label><br><br>
+        <button onclick="this.form.submit(); this.disabled=true;" type="submit" form="main_form"
+                value="Submit Response">Submit Response</button>
     </form>
     <br>
 
     {% if status_message %}
     <h4>{{ status_message }}</h4>
     {% endif %}
+
+    <br>
 
     <p>Inspired by <a href="https://youtu.be/O2C5R3FOWdE">Super Eyepatch Wolf's fantastic Garfield fever dream</a>,
         this website aims to complete his woefully unpure spreadsheet on the nature of "jokes" in Garfield.</p>

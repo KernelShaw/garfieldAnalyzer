@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .imgbox {
+            display: grid;
+            height: 100%;
+        }
+        .center-fit {
+            max-width: 640;
+            max-height: auto;
+            margin: auto;
+        }
+</style>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/main.css') }}" />
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<br>
+<h1>{{ joke }}</h1><br>
+<h2><a href="{{ url_for('joke_examples') }}">Back to jokes.</a></h2><br>
+{% if example_image %}
+<img src="{{ example_image }}" height=200px width=150px><br><br>
+{% endif %}
+<h4>{{ explanation }}</h4><br>
+<h2>Examples:</h2><br>
+<div class="imgbox">
+        <img class="center-fit" src="{{ s1 }}" height=auto width=720px><br>
+</div>
+<div class="imgbox">
+        <img class="center-fit" src="{{ s2 }}" height=auto width=720px><br>
+</div>
+<div class="imgbox">
+        <img class="center-fit" src="{{ s3 }}" height=auto width=720px><br>
+</div>
+</body>
+</html>
