@@ -2,15 +2,20 @@ body {
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     max-width: 900px;
-    margin:auto;
+    margin: auto;
+    background-color: khaki;
 }
 
 form {
     display: inline-block;
 }
 
+h1 {
+    color: orangered;
+}
+
 h4 {
-    color: red;
+    color: darkred;
 }
 
 #content img {

@@ -12,16 +12,18 @@ def garfield_analyzer():
     global RANDOM_STRIP
     global GARFIELD_ANALYZER
 
-    RANDOM_STRIP = GARFIELD_ANALYZER.random_strip()
+    if RANDOM_STRIP == "":
+        RANDOM_STRIP = GARFIELD_ANALYZER.random_strip()
     strip_location = "/static/garfield/" + RANDOM_STRIP + ".gif"
 
     if request.method == "POST":
         selection = request.form.get("selection")
+        laugh = request.form.get("laugh")
         if selection is None:
             return render_template('main.html', comic=strip_location, status_message="No selection. Please select one "
                                                                                      "of the joke options.")
         else:
-            GARFIELD_ANALYZER.update_entry_details(RANDOM_STRIP, selection)
+            GARFIELD_ANALYZER.update_entry_details(RANDOM_STRIP, selection, laugh)
             return redirect(url_for('garfield_redirect'))
     else:
         return render_template("main.html", comic=strip_location)
@@ -44,7 +46,8 @@ def garfield_redirect():
             GARFIELD_ANALYZER.update_entry_details(RANDOM_STRIP, selection)
             return redirect(url_for('garfield_redirect'))
 
-    return render_template("main.html", comic=strip_location, status_message="Thanks for your response!")
+    return render_template("main.html", comic=strip_location, status_message="Thanks for your response! Please, by"
+                                                                             " all means, continue! That's an order.")
 
 
 @app.route("/about")
@@ -165,7 +168,7 @@ def fat():
 
 @app.route("/jon_sad")
 def jon_sad():
-    joke = "Jon is pathetic?"
+    joke = "Jon is a loser?"
     text = "According to current data on the subject, the most common Garfield joke is probably 'Haha, Jon " \
            "is pathetic.' This might come as a surprise to most of you. Select this option for any strip where " \
            "the joke comes entirely at the expense of Jon."
@@ -179,7 +182,7 @@ def jon_sad():
 
 @app.route("/gar_hurt_jon")
 def gar_hurt_jon():
-    joke = "Garfield abusing Jon?"
+    joke = "Garfield making Jon's life difficult?"
     text = "Garfield tortures Jon. Like, a lot. If the strip's joke is that Garfield makes Jon's life just that much " \
            "more difficult, select this option."
     return render_template('joke.html',
@@ -193,9 +196,10 @@ def gar_hurt_jon():
 @app.route("/other")
 def other():
     joke = "Other?"
-    text = "Do not be alarmed if you answer \"Other\" for a lot of these strips. They account for roughly 17% of\"" \
+    text = "Do not be alarmed if you answer \"Other\" for a lot of these strips. They account for roughly 17% of" \
            " the comic's jokes (using the previous smaller subset of 1000 strips). Use this category for anything from " \
-           "running jokes to jokes that amount to 'Haha, Garfield is a cat. Cats don't do that!'"
+           "running jokes to jokes that amount to 'Haha, Garfield is a cat. Cats don't do that! / Haha, Garfield is a" \
+           " cat. Cats always do that!'"
     return render_template('joke.html',
                            s1="static/example_strips/o1.gif",
                            s2="static/example_strips/o2.gif",

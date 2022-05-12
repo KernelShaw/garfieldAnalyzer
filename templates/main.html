@@ -35,13 +35,13 @@
     <div class="imgbox">
         <img class="center-fit" src="{{comic}}" ><br>
     </div>
-    <h3>So, what's the joke?</h3>
+    <h3>So, what's the joke? <a href="{{ url_for('joke_examples') }}">(Explanations here)</a></h3>
     <br>
     <form action="{{ url_for('garfield_analyzer') }}" method="post" id="main_form">
 	    <input type="radio" id="option1" name="selection" value="K">
         <label for="option1">Garfield hates Odie</label>
         <input type="radio" id="option2" name="selection" value="J">
-        <label for="option2">Garfield abusing Jon</label>
+        <label for="option2">Garfield making Jon's life difficult</label>
         <input type="radio" id="option3" name="selection" value="H">
         <label for="option3">Garfield is lazy/gluttonous</label><br>
         <input type="radio" id="option4" name="selection" value="E">
@@ -55,7 +55,7 @@
         <input type="radio" id="option8" name="selection" value="G">
         <label for="option8">Surreal/Absurdist</label>
         <input type="radio" id="option9" name="selection" value="I">
-        <label for="option9">Jon is pathetic</label><br>
+        <label for="option9">Jon is a loser</label><br>
         <input type="radio" id="option10" name="selection" value="B">
         <label for="option10">Irma joke</label>
         <input type="radio" id="option11" name="selection" value="L">
@@ -69,6 +69,7 @@
     <br>
 
     {% if status_message %}
+    <br>
     <h4>{{ status_message }}</h4>
     {% endif %}
 

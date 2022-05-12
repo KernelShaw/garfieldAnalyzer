@@ -26,11 +26,9 @@ class GarfieldBase:
         import random
         return random.choice(self.strip_list)
 
-    def update_entry_details(self, strip, joke):
+    def update_entry_details(self, strip, joke, laugh_bool=None):
         total_number_of_responses = self.strip_info[strip][0]
         index = self.strip_info[strip][1]
-
-        drive_update(index, joke)
 
         n = open("data/counts.txt", 'r')
         count_list = n.readlines()
@@ -56,3 +54,5 @@ class GarfieldBase:
             n.close()
 
             del self.strip_list[index]
+
+        drive_update(index, joke, laugh_bool)
