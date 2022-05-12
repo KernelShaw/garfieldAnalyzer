@@ -129,7 +129,8 @@ def spiders():
 def relate():
     joke = "Relatable humor?"
     text = "\"I Hate Mondays\" anybody? Select this option for any strip that can be classified as " \
-           "\"Relatable Humor\". If this metric confuses you, see the examples below."
+           "\"relatable humor\". If the strip's joke has you saying \"Yeah, that's totally me,\" it's relatable " \
+           "humor."
     return render_template('joke.html',
                            s1="static/example_strips/r1.gif",
                            s2="static/example_strips/r2.gif",
