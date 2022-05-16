@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, session
 import pygsheets
 
 
@@ -81,19 +81,19 @@ class GarfieldBase:
 
 
 # GLOBALS
-RANDOM_STRIP = ""
 GARFIELD_ANALYZER = GarfieldBase()
 app = Flask(__name__)
+
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 
 @app.route("/", methods=["GET", "POST"])
 def garfield_analyzer():
-    global RANDOM_STRIP
     global GARFIELD_ANALYZER
 
-    if RANDOM_STRIP == "":
-        RANDOM_STRIP = GARFIELD_ANALYZER.random_strip()
-    strip_location = "/static/garfield/" + RANDOM_STRIP + ".gif"
+    if "RANDOM_STRIP" not in session:
+        session["RANDOM_STRIP"] = GARFIELD_ANALYZER.random_strip()
+    strip_location = "/static/garfield/" + session["RANDOM_STRIP"] + ".gif"
 
     if request.method == "POST":
         selection = request.form.get("selection")
@@ -102,7 +102,7 @@ def garfield_analyzer():
             return render_template('main.html', comic=strip_location, status_message="No selection. Please select one "
                                                                                      "of the joke options.")
         else:
-            GARFIELD_ANALYZER.update_entry_details(RANDOM_STRIP, selection, laugh)
+            GARFIELD_ANALYZER.update_entry_details(session["RANDOM_STRIP"], selection, laugh)
             return redirect(url_for('garfield_redirect'))
     else:
         return render_template("main.html", comic=strip_location)
@@ -110,11 +110,10 @@ def garfield_analyzer():
 
 @app.route("/success", methods=["GET", "POST"])
 def garfield_redirect():
-    global RANDOM_STRIP
     global GARFIELD_ANALYZER
 
-    RANDOM_STRIP = GARFIELD_ANALYZER.random_strip()
-    strip_location = "/static/garfield/" + RANDOM_STRIP + ".gif"
+    session["RANDOM_STRIP"] = GARFIELD_ANALYZER.random_strip()
+    strip_location = "/static/garfield/" + session["RANDOM_STRIP"] + ".gif"
 
     if request.method == "POST":
         selection = request.form.get("selection")
@@ -122,7 +121,7 @@ def garfield_redirect():
             return render_template('main.html', comic=strip_location, status_message="No selection. Please select one "
                                                                                      "of the joke options.")
         else:
-            GARFIELD_ANALYZER.update_entry_details(RANDOM_STRIP, selection)
+            GARFIELD_ANALYZER.update_entry_details(session["RANDOM_STRIP"], selection)
             return redirect(url_for('garfield_redirect'))
 
     return render_template("main.html", comic=strip_location, status_message="Thanks for your response! Please, by"
@@ -287,5 +286,5 @@ def other():
                            explanation=text)
 
 
-if __name__ == "__app__":
-    app.run(host='192.168.1.185', debug=True)
+if __name__ == '__main__':
+    app.run()
